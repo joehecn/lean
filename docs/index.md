@@ -1,10 +1,10 @@
 ---
 home: true
-heroImage: /hero.png
+heroImage: /logo.svg
 heroAlt: Logo image
 heroText: v3 lean
 tagline: docs
-actionText: Get Started
+actionText: 开始
 actionLink: /guide/
 features:
   - title: Simplicity First
