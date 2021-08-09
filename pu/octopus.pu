@@ -1,0 +1,24 @@
+@startuml octopus
+|用户|
+start
+:刷(八达通)卡;
+|#AntiqueWhite|八达通读卡器|
+:读取卡号
+发送卡号到电梯服务器;
+|电梯服务器|
+:查找卡号
+返回可控楼层数组;
+if (数组不为空?) then (No)
+  stop
+else (Yes)
+  :调用电梯控制SDK
+  发送可控楼层数组;
+  |#AntiqueWhite|电梯控制器|
+  :点亮可控楼层灯按键;
+  |用户|
+  :按下被点亮灯的楼层按键;
+  |#AntiqueWhite|电梯控制器|
+  :控制电梯到选定楼层;
+  stop
+endif
+@enduml

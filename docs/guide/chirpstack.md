@@ -25,7 +25,7 @@ docker-compose up
 ::: warning
 chirpstack-network-server:8000
 :::
-![network image](/network.png)
+![network image](/img/network.png)
 
 ## 添加 Service-profiles
 

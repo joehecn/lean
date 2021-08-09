@@ -1,0 +1,48 @@
+@startuml redis
+
+left to right direction
+
+database Master
+database Slave1
+database Slave1_1
+database Slave1_2
+database Slave1_3
+database Slave1_4
+database Slave2
+database Slave2_1
+database Slave2_2
+database Slave2_3
+database Slave2_4
+database Slave3
+database Slave3_1
+database Slave3_2
+database Slave3_3
+database Slave3_4
+database Slave4
+database Slave4_1
+database Slave4_2
+database Slave4_3
+database Slave4_4
+
+Master --> Slave1
+Slave1 --> Slave1_1
+Slave1 --> Slave1_2
+Slave1 --> Slave1_3
+Slave1 --> Slave1_4
+Master --> Slave2
+Slave2 --> Slave2_1
+Slave2 --> Slave2_2
+Slave2 --> Slave2_3
+Slave2 --> Slave2_4
+Master --> Slave3
+Slave3 --> Slave3_1
+Slave3 --> Slave3_2
+Slave3 --> Slave3_3
+Slave3 --> Slave3_4
+Master --> Slave4
+Slave4 --> Slave4_1
+Slave4 --> Slave4_2
+Slave4 --> Slave4_3
+Slave4 --> Slave4_4
+
+@enduml

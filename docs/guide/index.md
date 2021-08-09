@@ -1,3 +1,3 @@
-# 开始 {#getting-started}
+# 开始
 
-## 总览 {#overview}
+## 总览

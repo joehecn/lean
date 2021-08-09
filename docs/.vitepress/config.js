@@ -29,6 +29,10 @@ module.exports = {
             {
               text: 'chirpstack',
               link: '/guide/chirpstack'
+            },
+            {
+              text: '电梯方案',
+              link: '/guide/lift'
             }
           ]
         }

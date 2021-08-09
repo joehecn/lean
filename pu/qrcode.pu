@@ -1,0 +1,24 @@
+@startuml qrcode
+|用户|
+start
+:扫描二维码;
+|#AntiqueWhite|二维码扫描器|
+:读取二维码信息
+发送到电梯服务器;
+|电梯服务器|
+:通过二维码信息
+查找可控楼层数组;
+if (数组不为空?) then (No)
+  stop
+else (Yes)
+  :调用电梯控制SDK
+  发送可控楼层数组;
+  |#AntiqueWhite|电梯控制器|
+  :点亮可控楼层灯按键;
+  |用户|
+  :按下被点亮灯的楼层按键;
+  |#AntiqueWhite|电梯控制器|
+  :控制电梯到选定楼层;
+  stop
+endif
+@enduml
