@@ -31,6 +31,10 @@ module.exports = {
               link: '/guide/chirpstack'
             },
             {
+              text: 'influxDB2',
+              link: '/guide/influxdb2'
+            },
+            {
               text: '电梯方案',
               link: '/guide/lift'
             }

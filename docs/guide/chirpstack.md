@@ -1,4 +1,5 @@
 # chirpstack
+- http://47.242.32.120:8080
 
 ## 安装
 - [docker hub](https://hub.docker.com/u/chirpstack/)
