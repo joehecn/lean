@@ -1,0 +1,37 @@
+@startuml sys
+left to right direction
+frame 物管中控 {
+  card 基础配置
+  card 角色管理
+  card 用户管理
+  card 设备管理
+  card 权限管理
+}
+
+frame 电梯系统 {
+  card 八达通1
+  card 二维码1
+  card App蓝牙1
+}
+
+frame 门禁系统 {
+  card 八达通2
+  card 二维码2
+  card App蓝牙2
+  card 海康对讲系统
+}
+
+frame 会所系统 {
+  card 预定
+  card 支付
+}
+
+frame 智能家居 {
+  
+}
+
+物管中控 -- 电梯系统
+物管中控 -- 门禁系统
+物管中控 -- 会所系统
+物管中控 -- 智能家居
+@enduml

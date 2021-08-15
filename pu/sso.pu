@@ -1,0 +1,70 @@
+@startuml sso
+actor                        user
+participant "sso_client_test_a.cloud_building.fun" as       webA
+participant "sso_client_test_a.cloud_building.fun/api" as   sevA
+participant "sso.cloud_building.fun" as     webS
+
+activate user
+user -> webA: 访问前台某个授权 url 页面\n(sso_client_test_a.cloud_building.fun)
+
+note right of webA: 请求授权 url 页面流程
+group if [hash:jwtKey]
+  activate webA
+  webA -> webA: 保存全局变量 jwtKey
+end
+
+group if [没有 jwtKey]
+  webA -> webA: 携带 hash:redirect=授权 url 跳转到登录页\n转<渲染 login 页面流程>\nend
+end
+
+webA -> sevA: 在请求头 Header 中带 jwtKey 调用后台业务接口
+
+activate sevA
+sevA -> sevA: jwtKey 认证\n如果认证成功返回数据，如果失败返回错误码及原因
+sevA --> webA: 返回结果
+
+group if [认证成功]
+  webA -> webA: 将数据渲染到页面展示给用户\n结束
+else 认证失败
+  webA -> webA: 携带 hash:redirect=授权 url 跳转到登录页\n转<渲染 login 页面流程>\nend
+end
+
+note right of webA: 渲染 login 页面流程
+
+group if [hash:redirect || 没有参数(直接进登录页面)]
+  webA -> webA: redirect = hash:redirect || 首页\n将 redirect:授权 url 保存到 localStorage
+  webA -> webS: 携带 hash:redirect=登录 url 302 重定向到 sso.cloud_building.fun 前台
+  
+  activate webS
+  webS -> webS: 从 localStorage 获取 usermap = { username: jwtKey }
+  webS --> webA: 携带 hash:usermap 301 跳转回 sso_client_test_a.cloud_building.fun 登录url 页面\n转<渲染 login 页面流程>\nend
+else hash:usermap
+  group if [从 localStorage 获取 username && 从 usermap 中拿到了 username 的 jwtKey]
+    webA -> webA: 保存全局变量 jwtKey\n从 localStorage 获取 redirect:授权 url\n转<请求授权 url 页面流程>\nend
+  else 拿不到 jwtKey
+    webA -> webA: 解析 usermap 转换为用户列表, 渲染 login 页面等待用户输入\n转<用户登录流程>\nend
+  end
+end
+
+note right of user: 用户登录流程
+
+group if [输入用户名和密码]
+  user -> webA: 输入用户名和密码
+  webA -> sevA: 请求后台登录接口
+  sevA --> webA: 登录成功返回 jwtKey\n将 username 保存到 localstorage
+  deactivate sevA
+
+  webA -> webS: 从 localStorage 获取 redirect:授权 url, 组装 hash:jwtKey\n携带组装了 hash 的授权 url, { username, jwtKey } 302 重定向到 sso.cloud_building.fun 前台
+  webS -> webS: 将 { username, jwtKey } 保存到 localStorage
+  webS --> webA: 携带 jwtKey 301 跳转回 sso_client_test_a.cloud_building.fun 授权 url
+  deactivate webS
+
+  webA -> webA: 转<请求授权 url 页面流程>\nend
+else 选择用户列表中的username
+  user -> webA: 选择用户列表中的username
+  webA -> webA: 拿到了 username 的 jwtKey\n保存全局变量 jwtKey\n从 localStorage 获取 redirect:授权 url\n转<请求授权 url 页面流程>\nend
+end
+
+deactivate webA
+deactivate user
+@enduml

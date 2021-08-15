@@ -1,5 +1,12 @@
 # 电梯方案
 
+## 测试环境
+- `Slave`
+- ssh root@192.168.0.31
+- fu2021square
+
+- ssh -i /Users/hemiao/pem/id_rsa.pem -p 6000 root@47.242.32.120
+
 ## redis 主从复制
 `Redis` 数据库主要存储用户信息，包含用户拥有的八达通卡以及用户可以进入的楼号、单元、楼层信息
 
