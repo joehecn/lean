@@ -5,7 +5,7 @@
   "author": "joehecn <leanbrown@live.cn>",
   "license": "MIT",
   "devDependencies": {
-    "vitepress": "^0.15.6"
+    "vitepress": "^0.16.1"
   },
   "scripts": {
     "dev": "vitepress dev docs",
