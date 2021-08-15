@@ -16,7 +16,7 @@ module.exports = {
     lastUpdated: '最后修改时间',
     nav: [
       { text: '指引', link: '/guide/' },
-      { text: '流程', link: '/flow/' }
+      // { text: '流程', link: '/flow/' }
     ],
     sidebar: {
       '/': [
